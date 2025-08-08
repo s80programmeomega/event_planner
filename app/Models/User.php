@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'timezone',
+        'bio',
+        'role',
     ];
 
     /**
@@ -44,5 +47,35 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // A host can create multiple event types
+    public function eventTypes()
+    {
+        return $this->hasMany(EventType::class);
+    }
+
+    // A host has many availability slots
+    public function availabilities()
+    {
+        return $this->hasMany(Availability::class);
+    }
+
+    // As a host, you have many bookings
+    public function hostedBookings()
+    {
+        return $this->hasMany(Booking::class, 'host_id');
+    }
+
+    // As an attendee, you have many bookings
+    public function attendeeBookings()
+    {
+        return $this->hasMany(Booking::class, 'attendee_id');
+    }
+
+    // Calendar connections (OAuth)
+    public function calendarConnections()
+    {
+        return $this->hasMany(CalendarConnection::class);
     }
 }
