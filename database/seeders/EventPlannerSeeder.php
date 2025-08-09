@@ -30,9 +30,9 @@ class EventPlannerSeeder extends Seeder
             ->create();
 
         // Create 20 regular users (attendees)
-        $attendees = User::factory()
-            ->count(20)
-            ->create();
+        // $attendees = User::factory()
+        //     ->count(20)
+        //     ->create();
 
         // Create bookings
         Booking::factory()
